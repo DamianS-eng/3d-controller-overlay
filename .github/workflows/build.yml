@@ -22,7 +22,8 @@ jobs:
         run: |
           choco list
           where g++
-          echo %PATH%
+      - name: Verify working directory
+        run: dir
       - name: Run build script
         run: .\windows_build.bat
       - name: Upload executable
