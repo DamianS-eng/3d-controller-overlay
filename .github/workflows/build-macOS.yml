@@ -1,0 +1,35 @@
+name: Build Mac Binary
+
+on:
+  push:
+    branches: [ build-github-actions ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      # Checkout your repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Update homebrew
+        run: brew update
+      - name: Install Dependencies
+        run: brew install bear
+      - name: Verify installation
+        run: |
+          bear --version
+          # dpkg -l | grep glfw
+      - name: Verify working directory
+        run: ls
+      - name: Run build script
+        run: |
+          chmod +x mac_build.sh
+          ./mac_build.sh
+      - name: Upload executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-binary
+          path: |
+            3dco
