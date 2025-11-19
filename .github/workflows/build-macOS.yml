@@ -15,12 +15,12 @@ jobs:
       - name: Update homebrew
         run: brew update
       - name: Install Dependencies
-        run: brew install bear assimp
+        run: brew install bear assimp sdl2 glfw
       - name: Verify installation
         run: |
-          echo "LDFLAGS=-L$(brew --prefix assimp)/lib" >> $GITHUB_ENV
-          echo "CPPFLAGS=-I$(brew --prefix assimp)/include" >> $GITHUB_ENV
-          echo "PKG_CONFIG_PATH=$(brew --prefix assimp)/lib/pkgconfig" >> $GITHUB_ENV
+          echo "LDFLAGS=-L$(brew --prefix sdl2)/lib -L$(brew --prefix glfw)/lib -L$(brew --prefix assimp)/lib" >> $GITHUB_ENV
+          echo "CPPFLAGS=-I$(brew --prefix sdl2)/include -I$(brew --prefix glfw)/include -I$(brew --prefix assimp)/include" >> $GITHUB_ENV
+          echo "PKG_CONFIG_PATH=$(brew --prefix sdl2)/lib/pkgconfig:$(brew --prefix glfw)/lib/pkgconfig:$(brew --prefix assimp)/lib/pkgconfig" >> $GITHUB_ENV
           echo "LIBRARY_PATH=$(brew --prefix assimp)/lib" >> $GITHUB_ENV
           echo $LDFLAGS
           echo $CPPFLAGS
