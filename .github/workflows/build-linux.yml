@@ -20,7 +20,7 @@ jobs:
       - name: Verify installation
         run: |
           bear --version
-          locate glfw
+          dpkg -l | grep glfw
       - name: Verify working directory
         run: ls
       - name: Run build script
