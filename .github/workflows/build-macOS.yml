@@ -8,7 +8,10 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-
+    env:
+      LDFLAGS: "-L$(brew --prefix assimp)/lib"
+      CPPFLAGS: "-I$(brew --prefix assimp)/include"
+      PKG_CONFIG_PATH: "$(brew --prefix assimp)/lib/pkgconfig"
     steps:
       # Checkout your repository
       - name: Checkout repository
@@ -16,7 +19,7 @@ jobs:
       - name: Update homebrew
         run: brew update
       - name: Install Dependencies
-        run: brew install bear
+        run: brew install bear assimp
       - name: Verify installation
         run: |
           bear --version
