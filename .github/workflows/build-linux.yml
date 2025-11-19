@@ -16,9 +16,11 @@ jobs:
       - name: Install Bear
         run: sudo apt-get install bear
       - name: Install Dependencies
-        run: sudo apt-get install libsdl2-dev glfw3
+        run: sudo apt-get install libsdl2-dev libglfw3 libglfw3-dev
       - name: Verify installation
-        run: bear --version
+        run: |
+          bear --version
+          locate glfw
       - name: Verify working directory
         run: ls
       - name: Run build script
