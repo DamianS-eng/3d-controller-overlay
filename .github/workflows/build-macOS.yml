@@ -8,10 +8,6 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    env:
-      LDFLAGS: "-L$(brew --prefix assimp)/lib"
-      CPPFLAGS: "-I$(brew --prefix assimp)/include"
-      PKG_CONFIG_PATH: "$(brew --prefix assimp)/lib/pkgconfig"
     steps:
       # Checkout your repository
       - name: Checkout repository
@@ -22,8 +18,15 @@ jobs:
         run: brew install bear assimp
       - name: Verify installation
         run: |
+          echo "LDFLAGS=-L$(brew --prefix assimp)/lib" >> $GITHUB_ENV
+          echo "CPPFLAGS=-I$(brew --prefix assimp)/include" >> $GITHUB_ENV
+          echo "PKG_CONFIG_PATH=$(brew --prefix assimp)/lib/pkgconfig" >> $GITHUB_ENV
+          echo "LIBRARY_PATH=$(brew --prefix assimp)/lib" >> $GITHUB_ENV
+          echo $LDFLAGS
+          echo $CPPFLAGS
+          echo $PKG_CONFIG_PATH
           bear --version
-          # dpkg -l | grep glfw
+          brew --prefix assimp
       - name: Verify working directory
         run: ls
       - name: Run build script
