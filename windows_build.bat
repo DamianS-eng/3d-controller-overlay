@@ -6,7 +6,7 @@ set PATH=C:\tools\mingw64\bin;C:\tools\mingw32\bin;C:\ProgramData\chocolatey\bin
 
 REM Compile resource file if present
 if exist 3dco.rc (
-    windres -i 3dco.rc -O coff -o 3dco.res -I include
+    windres -i 3dco.rc -O coff -o 3dco.res
 )
 
 REM Run g++ with explicit file expansion
