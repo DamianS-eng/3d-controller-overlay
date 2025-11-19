@@ -18,6 +18,11 @@ jobs:
           choco install mingw -y
           echo "C:\ProgramData\chocolatey\bin" >> $env:GITHUB_PATH
           echo "C:\tools\mingw64\bin" >> $env:GITHUB_PATH
+      - name: Verify MinGW installation
+        run: |
+          choco list --local-only
+          where g++
+          echo %PATH%
       - name: Run build script
         run: .\windows_build.bat
       - name: Upload executable
