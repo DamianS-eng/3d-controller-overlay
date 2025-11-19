@@ -2,7 +2,7 @@
 setlocal
 
 REM Ensure MinGW is in PATH (adjust if installed elsewhere)
-set PATH=C:\tools\mingw64\bin;%PATH%
+set PATH=C:\tools\mingw64\bin;C:\tools\mingw32\bin;C:\ProgramData\chocolatey\bin;%PATH%
 
 REM Compile resource file if present
 if exist 3dco.rc (
