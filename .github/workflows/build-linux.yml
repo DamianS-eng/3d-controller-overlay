@@ -1,0 +1,33 @@
+name: Build Linux Binary
+
+on:
+  push:
+    branches: [ build-github-actions ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout your repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Bear
+        run: sudo apt-get install bear
+      - name: Install Dependencies
+        run: sudo apt-get install libsdl2-dev glfw3
+      - name: Verify installation
+        run: bear --version
+      - name: Verify working directory
+        run: ls
+      - name: Run build script
+        run: |
+          chmod +x linux_build.sh
+          .\linux_build
+      - name: Upload executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-binary
+          path: |
+            *
