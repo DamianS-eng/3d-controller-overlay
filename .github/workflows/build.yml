@@ -20,7 +20,7 @@ jobs:
           echo "C:\tools\mingw64\bin" >> $env:GITHUB_PATH
       - name: Verify MinGW installation
         run: |
-          choco list --local-only
+          choco list
           where g++
           echo %PATH%
       - name: Run build script
